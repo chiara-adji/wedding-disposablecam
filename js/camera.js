@@ -50,8 +50,8 @@ export class Camera {
 
   async start(facing = this.facing, { audio = false, video: videoConstraints } = {}) {
     if (!cameraSupported()) throw new CameraError('unsupported');
-    const id = ++this._startId;
-    this.stop();
+    this.stop(); // matikan stream lama (ini juga menaikkan _startId)
+    const id = this._startId;
     this.facing = facing;
     const constraints = {
       audio,
