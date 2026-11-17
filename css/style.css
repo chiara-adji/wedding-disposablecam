@@ -1,0 +1,624 @@
+/* =============================================================
+   Wedding Disposable Camera — Chiara & Adji
+   Mobile-first (desain Canva 360 × 852)
+   ============================================================= */
+
+:root {
+  --bg-dark: #1a120c;        /* hampir hitam kecokelatan */
+  --bg-strip: #26160e;
+  --olive: #5e6d45;
+  --olive-press: #4c5a37;
+  --olive-deep: #242b17;
+  --red: #b3261e;
+  --gold: #ffe88b;
+  --cream: #fffcf7;
+
+  --font-script: 'Great Vibes', 'Brush Script MT', cursive;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg-dark);
+  color: var(--cream);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+
+[hidden] { display: none !important; }
+
+/* Satu "halaman" = satu layar penuh. Di laptop dibatasi selebar HP. */
+.screen {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: 480px;
+  margin: 0 auto;
+  overflow: hidden;
+  isolation: isolate;
+}
+.screen.is-active { animation: fade-in 0.35s ease-out; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Judul script emas ---------- */
+.script-title {
+  margin: 0;
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--gold);
+  text-align: center;
+  line-height: 0.95;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+.script-title > span { display: block; }
+
+/* ---------- Tombol ---------- */
+.btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  text-align: center;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.12s ease, background-color 0.12s ease;
+}
+.btn:active { transform: scale(0.96); }
+.btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+.btn--olive {
+  background: var(--olive);
+  color: var(--cream);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+.btn--olive:active { background: var(--olive-press); }
+
+/* =============================================================
+   HALAMAN 1 — SAMBUTAN
+   ============================================================= */
+.welcome {
+  display: flex;
+  flex-direction: column;
+  background: var(--olive-deep);
+}
+.welcome__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to bottom,
+      rgba(36, 43, 23, 0) 30%,
+      rgba(36, 43, 23, 0.55) 62%,
+      rgba(26, 18, 12, 0.95) 100%),
+    url('../assets/img/welcome-bg.jpg') center 20% / cover no-repeat;
+  opacity: 0.85;
+}
+
+.welcome__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: calc(24px + var(--safe-top)) 24px 0;
+}
+.script-title__line1,
+.script-title__line2 { white-space: nowrap; }
+.script-title__line1 {
+  font-size: clamp(44px, 14vw, 60px);
+  transform: translateX(-6%);
+}
+.script-title__line2 {
+  font-size: clamp(44px, 14vw, 60px);
+  transform: translateX(5%);
+  margin-top: -4px;
+}
+.welcome__tagline {
+  margin: 14px 0 0;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--gold);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+.welcome__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  padding: 0 24px calc(28px + var(--safe-bottom));
+  margin-top: clamp(56px, 14vh, 130px);
+}
+.btn--start {
+  min-width: 150px;
+  min-height: 60px;
+  padding: 0 40px;
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.fine-print {
+  margin: 0;
+  max-width: 300px;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  color: rgba(255, 252, 247, 0.72);
+}
+
+/* =============================================================
+   HALAMAN 2 — PILIH MODE
+   ============================================================= */
+.mode {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-strip);
+}
+
+/* Strip film di latar belakang */
+.filmstrip {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  display: flex;
+  gap: 10px;
+  padding: 0 0 0 7%;
+}
+/* Strip foto berjalan pelan ke atas tanpa henti (dua salinan berurutan) */
+.filmstrip__track {
+  flex: 0 0 82%;
+  display: flex;
+  flex-direction: column;
+  animation: film-roll 38s linear infinite;
+  will-change: transform;
+}
+.filmstrip__photos {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 14px;
+}
+@keyframes film-roll {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+.filmstrip__photos img {
+  width: 100%;
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+  border-radius: 22px;
+}
+.filmstrip__edge {
+  flex: 1;
+  padding-top: calc(84px + var(--safe-top)) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 0 22vh;
+}
+/* label kedua turun ke bawah, supaya tidak ketutup tombol Camera roll */
+.edge-label--low { margin-top: auto; }
+.edge-label {
+  writing-mode: vertical-rl;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 252, 247, 0.55);
+}
+.edge-arrow,
+.camera-roll__arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 9px solid rgba(255, 252, 247, 0.55);
+}
+.mode__shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 90% 45% at 50% 50%, rgba(10, 6, 4, 0.55), transparent 75%),
+    rgba(10, 6, 4, 0.68);
+}
+
+/* Label CAMERA ROLL vertikal yang bisa diketuk */
+.camera-roll {
+  position: absolute;
+  z-index: 2;
+  top: 34%;
+  right: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 9px 14px;
+  border: 1px solid rgba(255, 232, 139, 0.55);
+  border-radius: 999px;
+  background: rgba(26, 18, 12, 0.6);
+  text-decoration: none;
+  color: var(--gold);
+}
+.camera-roll:active { background: rgba(94, 109, 69, 0.8); }
+.camera-roll__text {
+  writing-mode: vertical-rl;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.camera-roll__arrow { border-top-color: var(--gold); }
+
+.mode__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: calc(40px + var(--safe-top)) 52px 40px 22px;
+}
+.script-title--mode { font-size: clamp(34px, 10.4vw, 46px); }
+.script-title--mode > span { white-space: nowrap; }
+.script-title--mode > span:last-child { margin-top: 4px; }
+
+.mode__hint {
+  margin: 18px 0 0;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 252, 247, 0.85);
+}
+
+.mode__buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 30px;
+}
+.btn--mode {
+  position: relative;
+  min-height: 84px;
+  padding: 12px 10px;
+  border-radius: 28px;
+  gap: 4px;
+}
+.btn__label {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.btn__sub {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+}
+.btn__sticker {
+  position: absolute;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
+}
+.btn__sticker--camera {
+  width: 62px;
+  top: -30px;
+  left: -14px;
+  transform: rotate(-8deg);
+}
+.btn__sticker--handycam {
+  width: 60px;
+  bottom: -30px;
+  right: -16px;
+}
+
+.couple-footer {
+  padding: 0 0 calc(20px + var(--safe-bottom));
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* =============================================================
+   Halaman sementara (kamera & memories belum dibuat)
+   ============================================================= */
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 15px;
+}
+.script-title--small { font-size: 52px; }
+.back-btn {
+  position: absolute;
+  top: calc(16px + var(--safe-top));
+  left: 16px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 252, 247, 0.12);
+  font-size: 24px;
+  text-decoration: none;
+}
+
+/* Laptop: beri latar di luar "layar HP" */
+@media (min-width: 481px) {
+  body { background: #0d0906; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen.is-active { animation: none; }
+  .filmstrip__track { animation-duration: 120s; }
+  .btn { transition: none; }
+}
+
+/* =============================================================
+   Tombol bahasa EN / ID (hanya di halaman sambutan & pilih mode)
+   ============================================================= */
+.lang-switch {
+  position: fixed;
+  z-index: 50;
+  top: calc(14px + var(--safe-top));
+  right: max(14px, calc(50vw - 240px + 14px));
+  display: none;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(26, 18, 12, 0.55);
+  border: 1px solid rgba(255, 232, 139, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+body[data-route="welcome"] .lang-switch,
+body[data-route="mode"] .lang-switch { display: flex; }
+.lang-switch button {
+  min-width: 44px;
+  min-height: 34px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 252, 247, 0.75);
+  font: 600 12px/1 var(--font-sans);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+.lang-switch button[aria-pressed="true"] {
+  background: var(--gold);
+  color: #2a1d10;
+}
+
+/* Tombol tambahan */
+.btn--cream {
+  background: var(--cream);
+  color: var(--olive-deep);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid rgba(255, 252, 247, 0.6);
+}
+
+/* =============================================================
+   HALAMAN 5 — MEMORIES
+   ============================================================= */
+.memories {
+  display: flex;
+  flex-direction: column;
+  background: #222225;
+}
+.memories__head {
+  display: grid;
+  grid-template-columns: 56px 1fr 56px;
+  align-items: center;
+  padding: calc(18px + var(--safe-top)) 8px 16px;
+}
+.memories__back {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: #4b8df8;
+}
+.memories__back svg,
+.cam__back svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.memories__title { text-align: center; }
+.memories__title h1 {
+  margin: 0;
+  font: 600 19px/1.2 var(--font-sans);
+  color: #fff;
+}
+.memories__title p {
+  margin: 2px 0 0;
+  font: 500 12px/1.2 var(--font-sans);
+  color: rgba(255, 255, 255, 0.55);
+}
+.memories__count {
+  font: 500 11px/1.2 var(--font-sans);
+  color: rgba(255, 255, 255, 0.55);
+  text-align: right;
+  padding-right: 8px;
+}
+.memories__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  align-content: start;
+  flex: 1;
+}
+.mem-tile {
+  position: relative;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  background: #333;
+  cursor: pointer;
+  overflow: hidden;
+}
+.mem-tile img,
+.mem-tile video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mem-tile__badge {
+  position: absolute;
+  right: 6px;
+  bottom: 4px;
+  color: #fff;
+  font-size: 14px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+.memories__empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 24px;
+  font: 500 15px/1.4 var(--font-sans);
+  color: rgba(255, 255, 255, 0.75);
+}
+.memories__empty p { margin: 0; }
+.memories__go {
+  min-height: 56px;
+  padding: 0 28px;
+  font: 600 16px/1 var(--font-sans);
+}
+.memories .couple-footer { padding-top: 24px; }
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.94);
+}
+.viewer__close {
+  align-self: flex-end;
+  width: 56px;
+  height: 56px;
+  margin: calc(8px + var(--safe-top)) 8px 0 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 38px;
+  line-height: 1;
+  cursor: pointer;
+}
+.viewer__media {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 0 12px;
+}
+.viewer__media img,
+.viewer__media video {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.viewer__actions {
+  display: flex;
+  justify-content: center;
+  padding: 18px 24px calc(24px + var(--safe-bottom));
+}
+.viewer__save {
+  min-height: 56px;
+  padding: 0 32px;
+  font: 600 16px/1 var(--font-sans);
+}
+
+/* =============================================================
+   HALAMAN 6 — PENUTUP
+   ============================================================= */
+.thanks {
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.06), transparent 60%),
+    #5e6d45;
+}
+.thanks__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: calc(40px + var(--safe-top)) 32px 24px;
+  text-align: center;
+}
+.script-title--thanks { font-size: 64px; }
+.thanks__quote {
+  margin: 0;
+  font: italic 500 19px/1.5 var(--font-serif);
+  color: var(--gold);
+}
+.thanks__note {
+  margin: 0;
+  font: 500 14px/1.5 var(--font-sans);
+  color: var(--cream);
+}
+.thanks__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 280px;
+  margin-top: 8px;
+}
+.thanks__actions .btn {
+  min-height: 54px;
+  font: 600 15px/1 var(--font-sans);
+}

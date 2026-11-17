@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a120c">
+  <meta name="robots" content="noindex">
+  <title>The Wedding of Chiara &amp; Adji</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/camera.css">
+  <link rel="preload" as="image" href="assets/img/welcome-bg.jpg">
+</head>
+<body>
+
+  <!-- Tombol bahasa (tampil di halaman 1 & 2) -->
+  <div class="lang-switch" role="group" aria-label="Language / Bahasa">
+    <button type="button" data-lang="en" aria-pressed="true">EN</button>
+    <button type="button" data-lang="id" aria-pressed="false">ID</button>
+  </div>
+
+  <!-- ================= HALAMAN 1: SAMBUTAN ================= -->
+  <main class="screen welcome" data-screen="welcome">
+    <div class="welcome__bg" aria-hidden="true"></div>
+
+    <div class="welcome__content">
+      <h1 class="script-title">
+        <span class="script-title__line1">The Wedding of</span>
+        <span class="script-title__line2" data-couple>Chiara &amp; Adji</span>
+      </h1>
+      <p class="welcome__tagline">Our special day,<br>through your lens</p>
+    </div>
+
+    <div class="welcome__bottom">
+      <a class="btn btn--olive btn--start" href="#/mode" data-i18n="welcome.start">Start</a>
+      <p class="fine-print" data-i18n="welcome.note"></p>
+    </div>
+  </main>
+
+  <!-- ================= HALAMAN 2: PILIH MODE ================= -->
+  <main class="screen mode" data-screen="mode" data-title="Choose mode" hidden>
+    <div class="filmstrip" aria-hidden="true">
+      <div class="filmstrip__track">
+        <div class="filmstrip__photos">
+          <img src="assets/img/strip-1.jpg" alt="">
+          <img src="assets/img/strip-2.jpg" alt="">
+          <img src="assets/img/strip-3.jpg" alt="">
+          <img src="assets/img/strip-4.jpg" alt="">
+          <img src="assets/img/strip-5.jpg" alt="">
+        </div>
+        <!-- salinan kedua supaya putarannya menyambung tanpa jeda -->
+        <div class="filmstrip__photos">
+          <img src="assets/img/strip-1.jpg" alt="">
+          <img src="assets/img/strip-2.jpg" alt="">
+          <img src="assets/img/strip-3.jpg" alt="">
+          <img src="assets/img/strip-4.jpg" alt="">
+          <img src="assets/img/strip-5.jpg" alt="">
+        </div>
+      </div>
+      <div class="filmstrip__edge">
+        <span class="edge-label">19.12.2026</span>
+        <span class="edge-arrow"></span>
+        <span class="edge-label edge-label--low">Cepu</span>
+        <span class="edge-arrow"></span>
+      </div>
+    </div>
+    <div class="mode__shade" aria-hidden="true"></div>
+
+    <a class="camera-roll" href="#/memories" data-i18n-aria="mode.cameraRollAria">
+      <span class="camera-roll__text">Camera roll</span>
+      <span class="camera-roll__arrow" aria-hidden="true"></span>
+    </a>
+
+    <div class="mode__content">
+      <h1 class="script-title script-title--mode">
+        <span>How would you like to</span>
+        <span>capture today?</span>
+      </h1>
+      <p class="mode__hint" data-i18n="mode.hint">Choose one:</p>
+
+      <div class="mode__buttons">
+        <a class="btn btn--olive btn--mode" href="#/photo">
+          <img class="btn__sticker btn__sticker--camera" src="assets/img/sticker-camera.png" alt="">
+          <span class="btn__label">Disposable<br>camera</span>
+          <span class="btn__sub" data-i18n="mode.photo">Photo</span>
+        </a>
+        <a class="btn btn--olive btn--mode" href="#/video">
+          <img class="btn__sticker btn__sticker--handycam" src="assets/img/sticker-handycam.png" alt="">
+          <span class="btn__label">Handycam</span>
+          <span class="btn__sub" data-i18n="mode.video">Video</span>
+        </a>
+      </div>
+    </div>
+
+    <footer class="couple-footer">
+      <span data-couple>Chiara &amp; Adji</span><br>
+      <span data-place-date>Cepu, 19.12.2026</span>
+    </footer>
+  </main>
+
+  <!-- ================= HALAMAN 3: KAMERA FOTO ================= -->
+  <main class="screen cam cam--photo" data-screen="photo" data-title="Photo mode" hidden>
+    <header class="cam__topbar">
+      <a class="cam__back" href="#/mode" data-back="#/mode" data-i18n-aria="common.back">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8" /></svg>
+      </a>
+      <span class="cam__mode-pill">Photo mode</span>
+      <span class="cam__couple"><span data-couple>Chiara &amp; Adji</span><br><span data-place-date>Cepu, 19.12.2026</span></span>
+    </header>
+
+    <div class="cam__tools">
+      <button class="tool-btn" type="button" data-flash aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 5 13.5h6L10 22l8-11.5h-6z" /></svg>
+        <span data-flash-label>Flash off</span>
+      </button>
+      <span class="cam__filter-name" data-filter-name>Fujifilm 400</span>
+      <button class="tool-btn" type="button" data-timer>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2.5 2M9.5 2.5h5" /></svg>
+        <span data-timer-label>Timer off</span>
+      </button>
+    </div>
+
+    <div class="viewfinder" data-viewfinder>
+      <video class="viewfinder__video" data-video autoplay muted playsinline></video>
+      <div class="viewfinder__overlay" data-filter-overlay></div>
+      <div class="viewfinder__grain" data-grain></div>
+      <div class="viewfinder__stamp" data-live-stamp></div>
+      <div class="viewfinder__spinner" aria-hidden="true"></div>
+
+      <div class="zoom-bar" data-zoom-bar></div>
+      <div class="countdown" data-countdown hidden></div>
+
+      <!-- Penjelasan sebelum izin kamera / pesan error -->
+      <div class="cam-msg" data-cam-msg hidden>
+        <div class="cam-msg__box">
+          <p class="cam-msg__title" data-cam-msg-title></p>
+          <div class="cam-msg__text" data-cam-msg-text></div>
+          <button class="btn btn--olive cam-msg__btn" type="button" data-cam-msg-btn></button>
+          <label class="cam-msg__alt" data-cam-file-label hidden>
+            <input type="file" accept="image/*" capture="environment" data-cam-file>
+            <span></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="cam__controls">
+      <span class="cam__left" data-left>20 left</span>
+      <span class="cam__label" data-i18n="photo.label">Photo</span>
+      <a class="cam__thumb" href="#/memories" data-thumb data-i18n-aria="photo.thumbAria"></a>
+      <button class="shutter" type="button" data-shutter data-i18n-aria="photo.shutterAria"></button>
+      <button class="cam__switch" type="button" data-switch data-i18n-aria="photo.switchAria">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16m0 4v-4h-4" /></svg>
+      </button>
+    </div>
+
+    <div class="filter-bar">
+      <span class="filter-bar__title" data-i18n-html="photo.chooseFilter">Choose<br>filter</span>
+      <div class="filter-bar__list" data-filter-list role="radiogroup" aria-label="Filter"></div>
+    </div>
+
+    <p class="cam__status" data-status role="status" aria-live="polite"></p>
+    <div class="shutter-flash" data-shutter-flash></div>
+  </main>
+
+  <!-- ================= HALAMAN 4: KAMERA VIDEO (langkah 3) ================= -->
+  <main class="screen placeholder" data-screen="video" data-title="Video mode" hidden>
+    <a class="back-btn" href="#/mode" data-back="#/mode" data-i18n-aria="common.back">&#8592;</a>
+    <h1 class="script-title script-title--small">Video mode</h1>
+    <p>Coming soon…</p>
+  </main>
+
+  <!-- ================= HALAMAN 5: MEMORIES ================= -->
+  <main class="screen memories" data-screen="memories" data-title="Memories" hidden>
+    <header class="memories__head">
+      <a class="memories__back" href="#/mode" data-back="#/mode" data-i18n-aria="common.back">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8" /></svg>
+      </a>
+      <div class="memories__title">
+        <h1>Memories</h1>
+        <p>December 19, 2026</p>
+      </div>
+      <span class="memories__count" data-mem-count></span>
+    </header>
+
+    <div class="memories__grid" data-mem-grid></div>
+    <div class="memories__empty" data-mem-empty hidden>
+      <p data-i18n="mem.empty"></p>
+      <a class="btn btn--olive memories__go" href="#/mode" data-i18n="mem.go"></a>
+    </div>
+
+    <footer class="couple-footer">
+      <span data-couple>Chiara &amp; Adji</span><br>
+      <span data-place-date>Cepu, 19.12.2026</span>
+    </footer>
+
+    <!-- Tampilan besar satu foto -->
+    <div class="viewer" data-viewer hidden>
+      <button class="viewer__close" type="button" data-viewer-close data-i18n-aria="mem.close">&times;</button>
+      <div class="viewer__media" data-viewer-media></div>
+      <div class="viewer__actions">
+        <button class="btn btn--olive viewer__save" type="button" data-viewer-save data-i18n="mem.save"></button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= HALAMAN 6: PENUTUP ================= -->
+  <main class="screen thanks" data-screen="thanks" data-title="Thank you" hidden>
+    <div class="thanks__content">
+      <h1 class="script-title script-title--thanks" data-i18n="thanks.title">Thank you</h1>
+      <p class="thanks__quote">
+        Some stories take time to find their page. Ours brought us here&mdash;surrounded
+        by the people we love most.
+      </p>
+      <p class="thanks__note" data-i18n="thanks.note"></p>
+      <div class="thanks__actions">
+        <a class="btn btn--cream" href="#/memories" data-i18n="thanks.see"></a>
+        <a class="btn btn--ghost" href="#/mode" data-i18n="thanks.menu"></a>
+      </div>
+    </div>
+    <footer class="couple-footer">
+      <span data-couple>Chiara &amp; Adji</span><br>
+      <span data-place-date>Cepu, 19.12.2026</span>
+    </footer>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

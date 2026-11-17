@@ -1,0 +1,8 @@
+# Catatan pribadi proyek (berisi link Drive & Canva) — jangan ikut ke GitHub publik
+CLAUDE.md
+.claude/
+
+# File sistem
+Thumbs.db
+desktop.ini
+.DS_Store
