@@ -5,7 +5,7 @@
 
 export const CONFIG = {
   // URL web app Google Apps Script (diisi di langkah 5).
-  APPS_SCRIPT_URL: '',
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycby6jbi4YzhrQG2U5HAWiMJ-0ETkwT6tswey_xg65ff5xkFdAhbBi5JrRRd6_vYSl-fnVg/exec',
 
   // Kode acara. Ikut tertulis di link QR: https://<domain>/?e=KODE
   // Apps Script akan menolak upload tanpa kode yang cocok.
