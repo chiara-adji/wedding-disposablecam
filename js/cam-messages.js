@@ -33,8 +33,9 @@ export function showCamMessage(root, kind, onAction) {
 
   switch (kind) {
     case 'explain':
+    case 'explainVideo':
       title.textContent = t('cam.explain.title');
-      text.innerHTML = t('cam.explain.text');
+      text.innerHTML = t(kind === 'explainVideo' ? 'cam.explainVideo.text' : 'cam.explain.text');
       btnText = t('cam.explain.btn');
       showFile = false;
       break;

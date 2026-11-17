@@ -1,9 +1,10 @@
 import { CONFIG } from './config.js';
 import { getItem, setItem, getDeviceId } from './storage.js';
 import { getMeta, setMeta } from './db.js';
-import { startRouter } from './router.js';
-import { applyI18n, setGlobals } from './i18n.js';
+import { startRouter, registerScreen } from './router.js';
+import { applyI18n, setGlobals, t } from './i18n.js';
 import './photo-page.js';
+import './video-page.js';
 import './memories.js';
 
 // ---------- Kode acara dari link QR (?e=KODE) ----------
@@ -28,5 +29,13 @@ document.querySelectorAll('[data-couple]').forEach((el) => (el.textContent = CON
 document.querySelectorAll('[data-place-date]').forEach((el) => (el.textContent = CONFIG.PLACE_DATE));
 setGlobals({ couple: CONFIG.COUPLE });
 applyI18n();
+
+// ---------- Halaman penutup: pesan sesuai slot yang habis ----------
+registerScreen('thanks', {
+  enter() {
+    const note = document.querySelector('[data-screen="thanks"] .thanks__note');
+    note.textContent = t(getItem('thanksKind') === 'video' ? 'thanks.noteVideo' : 'thanks.note');
+  },
+});
 
 startRouter(CONFIG.COUPLE);

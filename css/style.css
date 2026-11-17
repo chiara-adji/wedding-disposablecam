@@ -622,3 +622,16 @@ body[data-route="mode"] .lang-switch { display: flex; }
   min-height: 54px;
   font: 600 15px/1 var(--font-sans);
 }
+
+/* Foto/video besar selalu muat di layar */
+.viewer__media { position: relative; }
+.viewer__media img,
+.viewer__media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+}

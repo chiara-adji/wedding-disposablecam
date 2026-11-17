@@ -155,14 +155,17 @@ export class Camera {
    * Ambil frame seperti yang terlihat di viewfinder (potongan, zoom digital, cermin).
    * @returns {HTMLCanvasElement}
    */
-  grabFrame(maxSide = 1600) {
-    const v = this.video;
-    const vw = v.videoWidth;
-    const vh = v.videoHeight;
-    if (!vw || !vh) return null;
+  /** Rasio lebar/tinggi kotak viewfinder */
+  boxRatio() {
     const rect = this.frame.getBoundingClientRect();
-    const boxRatio = rect.width / rect.height;
-    // object-fit: cover
+    return rect.width && rect.height ? rect.width / rect.height : 3 / 4;
+  }
+
+  /** Potongan video (object-fit: cover + zoom digital) untuk rasio tertentu */
+  sourceRect(boxRatio = this.boxRatio()) {
+    const vw = this.video.videoWidth;
+    const vh = this.video.videoHeight;
+    if (!vw || !vh) return null;
     let sw = vw;
     let sh = vw / boxRatio;
     if (sh > vh) {
@@ -172,8 +175,14 @@ export class Camera {
     const d = this._digital || 1;
     sw /= d;
     sh /= d;
-    const sx = (vw - sw) / 2;
-    const sy = (vh - sh) / 2;
+    return { sx: (vw - sw) / 2, sy: (vh - sh) / 2, sw, sh };
+  }
+
+  grabFrame(maxSide = 1600) {
+    const v = this.video;
+    const src = this.sourceRect();
+    if (!src) return null;
+    const { sx, sy, sw, sh } = src;
 
     const scale = Math.min(1, maxSide / Math.max(sw, sh));
     const canvas = document.createElement('canvas');

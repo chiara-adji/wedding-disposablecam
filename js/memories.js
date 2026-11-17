@@ -40,7 +40,11 @@ async function render() {
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'mem-tile';
-    if (shot.kind === 'video') {
+    if (shot.kind === 'video' && shot.poster) {
+      const posterUrl = URL.createObjectURL(shot.poster);
+      urls.push(posterUrl);
+      b.innerHTML = `<img src="${posterUrl}" alt="" loading="lazy"><span class="mem-tile__badge">▶</span>`;
+    } else if (shot.kind === 'video') {
       b.innerHTML = `<video src="${url}#t=0.1" muted playsinline preload="metadata"></video><span class="mem-tile__badge">▶</span>`;
     } else {
       b.innerHTML = `<img src="${url}" alt="" loading="lazy">`;

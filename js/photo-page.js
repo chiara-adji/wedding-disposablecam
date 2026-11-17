@@ -49,6 +49,11 @@ const state = {
   thumbUrl: null,
 };
 
+function goThanks() {
+  setItem('thanksKind', 'photo');
+  go('thanks');
+}
+
 const left = () => Math.max(0, CONFIG.PHOTO_LIMIT - state.used);
 
 // ---------------------------------------------------------------
@@ -228,7 +233,7 @@ async function savePhoto(canvas) {
     requestPersistence();
     await refreshThumb();
     setStatus(t('photo.saved', { n: left() }));
-    if (left() === 0) setTimeout(() => currentRoute() === 'photo' && go('thanks'), 1600);
+    if (left() === 0) setTimeout(() => currentRoute() === 'photo' && goThanks(), 1600);
   } catch (err) {
     console.error(err);
     state.used--;
@@ -244,7 +249,7 @@ async function takePhoto() {
   }
   if (state.busy) return;
   if (left() <= 0) {
-    go('thanks');
+    goThanks();
     return;
   }
   if (!camera.stream) return;
@@ -317,7 +322,7 @@ fileInput.addEventListener('change', async () => {
   const file = fileInput.files && fileInput.files[0];
   fileInput.value = '';
   if (!file) return;
-  if (left() <= 0) return go('thanks');
+  if (left() <= 0) return goThanks();
   try {
     const canvas = await fileToCanvas(file, 1600);
     await savePhoto(canvas);
@@ -358,7 +363,7 @@ registerScreen('photo', {
     renderCounter();
     refreshThumb();
     if (left() === 0) {
-      go('thanks');
+      goThanks();
       return;
     }
     openCamera();

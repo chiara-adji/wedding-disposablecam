@@ -166,10 +166,61 @@
   </main>
 
   <!-- ================= HALAMAN 4: KAMERA VIDEO (langkah 3) ================= -->
-  <main class="screen placeholder" data-screen="video" data-title="Video mode" hidden>
-    <a class="back-btn" href="#/mode" data-back="#/mode" data-i18n-aria="common.back">&#8592;</a>
-    <h1 class="script-title script-title--small">Video mode</h1>
-    <p>Coming soon…</p>
+  <main class="screen cam cam--video" data-screen="video" data-title="Video mode" hidden>
+    <header class="cam__topbar">
+      <a class="cam__back" href="#/mode" data-back="#/mode" data-i18n-aria="common.back">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8" /></svg>
+      </a>
+      <span class="cam__mode-pill">Video mode</span>
+      <span class="cam__couple"><span data-couple>Chiara &amp; Adji</span><br><span data-place-date>Cepu, 19.12.2026</span></span>
+    </header>
+
+    <div class="cam__tools">
+      <span class="tool-note" data-max-len></span>
+      <span class="cam__filter-name" data-filter-name>Handy '98</span>
+      <span class="tool-note tool-note--right" data-rec-left></span>
+    </div>
+
+    <div class="viewfinder" data-viewfinder>
+      <video class="viewfinder__source" data-video autoplay muted playsinline></video>
+      <canvas class="viewfinder__canvas" data-canvas></canvas>
+      <div class="viewfinder__spinner" aria-hidden="true"></div>
+      <div class="zoom-bar" data-zoom-bar></div>
+
+      <div class="cam-msg" data-cam-msg hidden>
+        <div class="cam-msg__box">
+          <p class="cam-msg__title" data-cam-msg-title></p>
+          <div class="cam-msg__text" data-cam-msg-text></div>
+          <button class="btn btn--olive cam-msg__btn" type="button" data-cam-msg-btn></button>
+          <label class="cam-msg__alt" data-cam-file-label hidden>
+            <input type="file" accept="video/*" capture="environment" data-cam-file>
+            <span></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="cam__controls">
+      <span class="cam__left" data-left>5 left</span>
+      <span class="cam__label" data-rec-label>Record</span>
+      <a class="cam__thumb" href="#/memories" data-thumb data-i18n-aria="video.thumbAria"></a>
+      <button class="record-btn" type="button" data-record data-i18n-aria="video.recordAria">
+        <svg class="record-btn__ring" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="46" pathLength="100" data-ring />
+        </svg>
+        <span class="record-btn__dot"></span>
+      </button>
+      <button class="cam__switch" type="button" data-switch data-i18n-aria="photo.switchAria">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16m0 4v-4h-4" /></svg>
+      </button>
+    </div>
+
+    <div class="filter-bar">
+      <span class="filter-bar__title" data-i18n-html="photo.chooseFilter">Choose<br>filter</span>
+      <div class="filter-bar__list filter-bar__list--3" data-filter-list role="radiogroup" aria-label="Filter"></div>
+    </div>
+
+    <p class="cam__status" data-status role="status" aria-live="polite"></p>
   </main>
 
   <!-- ================= HALAMAN 5: MEMORIES ================= -->

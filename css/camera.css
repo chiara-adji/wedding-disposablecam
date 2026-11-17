@@ -428,3 +428,99 @@
   .filter-chip__dot { width: 40px; height: 40px; }
   .cam__status { bottom: 200px; }
 }
+
+/* =============================================================
+   HALAMAN 4 — HANDYCAM (nuansa merah)
+   ============================================================= */
+.cam--video {
+  --cam-accent: var(--red);
+  --cam-panel: #3a3d33;
+}
+.cam--video .cam__tools { background: #2a2c25; }
+.cam--video .filter-bar__title { background: var(--red); }
+.filter-bar__list--3 { grid-template-columns: repeat(3, 1fr); }
+
+.tool-note {
+  font: 600 11px/1.2 var(--font-sans);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0 4px;
+}
+.tool-note--right {
+  justify-self: end;
+  color: #ff5a4f;
+}
+
+/* Video kamera disembunyikan di bawah canvas (canvas yang tampil & terekam) */
+.viewfinder__source {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+}
+.viewfinder__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.record-btn {
+  grid-area: shutter;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+.record-btn__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.record-btn__ring circle {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 6;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+.record-btn::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.85);
+}
+.record-btn__dot {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--red);
+  transition: width 0.2s ease, height 0.2s ease, border-radius 0.2s ease;
+}
+.cam.is-recording .record-btn::before { border-color: rgba(255, 255, 255, 0.25); }
+.cam.is-recording .record-btn__ring circle { stroke: #ff5a4f; }
+.cam.is-recording .record-btn__dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+.cam.is-recording .cam__label { color: #ff8a80; }
+.cam.is-recording .cam__switch,
+.cam.is-recording .filter-bar,
+.cam.is-recording .cam__thumb,
+.cam.is-recording .zoom-bar { opacity: 0.35; pointer-events: none; }
+.cam--video .cam__thumb { position: relative; }
+.cam--video .zoom-bar { bottom: auto; top: 12px; }
