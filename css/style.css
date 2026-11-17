@@ -639,45 +639,77 @@ body[data-route="name"] .lang-switch { display: flex; }
    HALAMAN 6 — PENUTUP
    ============================================================= */
 .thanks {
-  display: flex;
-  flex-direction: column;
+  /* 1u = 1px di desain Canva (lebar 360) */
+  --u: calc(min(100vw, 480px) / 360);
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.06), transparent 60%),
+    url('../assets/img/thanks-texture.png') center top / calc(var(--u) * 260) repeat,
     #5e6d45;
+  background-blend-mode: multiply;
 }
-.thanks__content {
-  flex: 1;
+.thanks__board {
+  position: relative;
+  min-height: calc(var(--u) * 960);
+  min-height: max(calc(var(--u) * 960), 100dvh);
+}
+.thanks__board > * { position: absolute; }
+.thanks__stamp {
+  width: calc(var(--u) * 183.6);
+  height: calc(var(--u) * 229.5);
+  filter: drop-shadow(0 calc(var(--u) * 3) calc(var(--u) * 6) rgba(0, 0, 0, 0.3));
+}
+.thanks__stamp--1 { top: calc(var(--u) * 186.7); left: calc(var(--u) * 88.2); transform: rotate(2.04deg); }
+.thanks__stamp--2 { top: calc(var(--u) * 478.2); left: calc(var(--u) * 87.8); transform: rotate(-1.85deg); }
+.thanks__deco { display: block; pointer-events: none; }
+.thanks__paper { top: 0; left: calc(var(--u) * 136.3); width: calc(var(--u) * 238.2); height: calc(var(--u) * 207.3); }
+.thanks__receipt {
+  top: calc(var(--u) * 71.8);
+  left: calc(var(--u) * 240.8);
+  width: calc(var(--u) * 137.4);
+  height: calc(var(--u) * 223.4);
+  transform: rotate(-3.39deg);
+}
+.thanks__tulips { top: calc(var(--u) * 130.3); left: calc(var(--u) * 54.3); width: calc(var(--u) * 82); }
+.thanks__camera { top: calc(var(--u) * 174.1); left: calc(var(--u) * 213.4); width: calc(var(--u) * 84); }
+.thanks__bird { top: calc(var(--u) * 648.8); left: calc(var(--u) * 200); width: calc(var(--u) * 110.9); }
+.thanks__camcorder { top: calc(var(--u) * 673.1); left: calc(var(--u) * 54.3); width: calc(var(--u) * 104.8); }
+.thanks__quote {
+  top: calc(var(--u) * 424);
+  left: calc(var(--u) * 34);
+  width: calc(var(--u) * 292);
+  margin: 0;
+  font: italic 500 calc(var(--u) * 13) / 1.35 var(--font-serif);
+  text-align: center;
+  color: #fedd2d;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+.thanks__bottom {
+  top: calc(var(--u) * 770);
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: calc(40px + var(--safe-top)) 32px 24px;
+  padding: 0 calc(var(--u) * 28);
   text-align: center;
 }
-.script-title--thanks { font-size: 64px; }
-.thanks__quote {
-  margin: 0;
-  font: italic 500 19px/1.5 var(--font-serif);
-  color: var(--gold);
-}
 .thanks__note {
-  margin: 0;
-  font: 500 14px/1.5 var(--font-sans);
+  margin: 0 0 calc(var(--u) * 12);
+  font: 500 calc(var(--u) * 12.5) / 1.45 var(--font-sans);
   color: var(--cream);
 }
 .thanks__actions {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  gap: calc(var(--u) * 10);
   width: 100%;
-  max-width: 280px;
-  margin-top: 8px;
 }
 .thanks__actions .btn {
-  min-height: 54px;
-  font: 600 15px/1 var(--font-sans);
+  flex: 1;
+  min-height: 46px;
+  padding: 0 10px;
+  font: 600 13.5px/1.15 var(--font-sans);
 }
+.thanks .couple-footer { margin-top: auto; padding-top: calc(var(--u) * 22); }
 
 /* Foto/video besar selalu muat di layar */
 .viewer__media { position: relative; }
