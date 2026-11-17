@@ -49,6 +49,16 @@ export function showCamMessage(root, kind, onAction) {
       btnText = t('cam.unsupported.btn');
       action = () => copyLink(() => { btn.textContent = t('cam.copied'); });
       break;
+    case 'paused':
+      title.textContent = t('cam.paused.title');
+      text.textContent = t('cam.paused.text');
+      btnText = t('cam.paused.btn');
+      showFile = false;
+      break;
+    case 'blank':
+      title.textContent = t('cam.blank.title');
+      text.innerHTML = t('cam.blank.text');
+      break;
     case 'busy':
     case 'notfound':
       title.textContent = t(`cam.${kind}.title`);

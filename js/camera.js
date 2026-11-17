@@ -90,6 +90,7 @@ export class Camera {
       /* iOS kadang butuh sentuhan; video tetap jalan setelah metadata siap */
     }
     await this._waitForSize();
+    if (id !== this._startId) return;
     this._readCapabilities();
     this.zoom = 1;
     this._digital = 1;
@@ -104,7 +105,31 @@ export class Camera {
   }
 
   async _waitForSize() {
-    for (let i = 0; i < 40 && !this.video.videoWidth; i++) await wait(50);
+    for (let i = 0; i < 60 && !this.video.videoWidth; i++) await wait(50);
+  }
+
+  /**
+   * Cek apakah gambar kamera benar-benar tampil.
+   * 'ok' | 'paused' (browser menahan video, perlu disentuh) | 'blank' (tidak ada gambar)
+   */
+  health() {
+    if (!this.stream) return 'blank';
+    const track = this.track;
+    if (!track || track.readyState === 'ended') return 'blank';
+    if (this.video.paused) return 'paused';
+    if (!this.video.videoWidth) return 'blank';
+    return 'ok';
+  }
+
+  /** Dipanggil dari ketukan tamu (iOS kadang butuh sentuhan untuk memutar video) */
+  async resume() {
+    try {
+      await this.video.play();
+    } catch {
+      /* biarkan, health() akan melaporkan */
+    }
+    await this._waitForSize();
+    return this.health();
   }
 
   _readCapabilities() {

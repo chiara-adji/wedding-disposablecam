@@ -161,12 +161,33 @@ async function startCamera(facing) {
     await camera.start(facing);
     setItem('camGranted', true);
     renderZoom();
+    await checkPicture(facing);
   } catch (err) {
     if (!state.active) return;
     showCamMessage(root, err.kind || 'unknown', () => startCamera(facing));
   } finally {
     root.classList.remove('is-loading');
   }
+}
+
+// Kalau kamera sudah diizinkan tapi gambarnya tidak muncul, beri tombol yang jelas
+async function checkPicture(facing) {
+  let h = camera.health();
+  if (h === 'ok') return;
+  if (h === 'paused') {
+    showCamMessage(root, 'paused', async () => {
+      hideCamMessage(root);
+      const after = await camera.resume();
+      if (after !== 'ok' && state.active) showCamMessage(root, 'blank', () => startCamera(facing));
+    });
+    return;
+  }
+  // beri waktu sebentar, beberapa HP lambat mengirim gambar pertama
+  await new Promise((r) => setTimeout(r, 2500));
+  h = camera.health();
+  if (h === 'ok' || !state.active) return;
+  if (h === 'paused') return checkPicture(facing);
+  showCamMessage(root, 'blank', () => startCamera(facing));
 }
 
 function openCamera() {

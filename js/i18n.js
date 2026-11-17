@@ -62,6 +62,11 @@ const DICT = {
     'cam.unknown.title': 'Camera couldn’t start',
     'cam.unknown.text': 'Something went wrong. Please try again.',
     'cam.retry': 'Try again',
+    'cam.paused.title': 'Almost there',
+    'cam.paused.text': 'Tap the button below to show the camera.',
+    'cam.paused.btn': 'Show camera',
+    'cam.blank.title': 'Camera is still black',
+    'cam.blank.text': 'Tap <b>Try again</b>. If it stays black, close this tab, open the link again, and use Chrome (Android) or Safari (iPhone).',
     'cam.fileAlt': 'Use the phone’s own camera instead',
 
     'mem.empty': 'No photos or videos yet.',
@@ -134,6 +139,11 @@ const DICT = {
     'cam.unknown.title': 'Kamera belum bisa menyala',
     'cam.unknown.text': 'Ada kendala. Coba lagi ya.',
     'cam.retry': 'Coba lagi',
+    'cam.paused.title': 'Sedikit lagi',
+    'cam.paused.text': 'Ketuk tombol di bawah untuk menampilkan kamera.',
+    'cam.paused.btn': 'Tampilkan kamera',
+    'cam.blank.title': 'Kamera masih hitam',
+    'cam.blank.text': 'Ketuk <b>Coba lagi</b>. Kalau tetap hitam, tutup tab ini, buka link-nya lagi, dan pakai Chrome (Android) atau Safari (iPhone).',
     'cam.fileAlt': 'Pakai kamera bawaan HP saja',
 
     'mem.empty': 'Belum ada foto atau video.',

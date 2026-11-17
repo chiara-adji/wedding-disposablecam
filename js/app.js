@@ -30,6 +30,11 @@ document.querySelectorAll('[data-place-date]').forEach((el) => (el.textContent =
 setGlobals({ couple: CONFIG.COUPLE });
 applyI18n();
 
+// Nomor versi kecil di halaman pilih mode (untuk cek HP sudah memakai versi terbaru)
+const version = document.querySelector('meta[name="app-version"]')?.content;
+const versionEl = document.querySelector('[data-app-version]');
+if (versionEl && version) versionEl.textContent = `v${version}`;
+
 // ---------- Halaman penutup: pesan sesuai slot yang habis ----------
 registerScreen('thanks', {
   enter() {
