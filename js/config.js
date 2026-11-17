@@ -13,7 +13,7 @@ export const CONFIG = {
 
   // Batas per HP
   PHOTO_LIMIT: 20,
-  VIDEO_LIMIT: 5,
+  VIDEO_LIMIT: 10,
   VIDEO_MAX_SECONDS: 30,
 
   // Teks yang tampil di halaman

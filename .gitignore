@@ -9,3 +9,6 @@ desktop.ini
 
 # Kode Apps Script berisi ID folder Drive pribadi; disimpan lokal saja
 apps-script/
+
+# File QR untuk dicetak (bukan bagian web)
+qr/
