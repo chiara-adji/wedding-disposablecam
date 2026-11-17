@@ -21,11 +21,11 @@ function clearUrls() {
   urls = [];
 }
 
+// Sama dengan nama file di Drive: putri_foto1.jpg / putri_video1.mp4
 function fileName(shot) {
-  const d = new Date(shot.createdAt);
-  const p = (n) => String(n).padStart(2, '0');
-  const stamp = `${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`;
-  return `chiara-adji_${stamp}.${shot.ext}`;
+  const who = shot.guestSlug || 'tamu';
+  const kind = shot.kind === 'video' ? 'video' : 'foto';
+  return `${who}_${kind}${shot.seq || 1}.${shot.ext}`;
 }
 
 async function render() {

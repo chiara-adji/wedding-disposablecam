@@ -8,8 +8,10 @@ import {
 import { addShot, countShots, listShots, requestPersistence } from './db.js';
 import { getItem, setItem, getDeviceId } from './storage.js';
 import { registerScreen, go, currentRoute } from './router.js';
+import { getGuestName, guestSlug, requireGuestName } from './guest.js';
 import { showCamMessage, hideCamMessage } from './cam-messages.js';
 import { t, onLangChange } from './i18n.js';
+import { setupFrame } from './frame.js';
 
 const root = document.querySelector('[data-screen="photo"]');
 const $ = (sel) => root.querySelector(sel);
@@ -35,7 +37,9 @@ const filterName = $('[data-filter-name]');
 const statusEl = $('[data-status]');
 const fileInput = $('[data-cam-file]');
 
-const camera = new Camera(video, viewfinder);
+const frameEl = $('[data-frame]');
+const camera = new Camera(video, frameEl);
+const frame = setupFrame(root, 'photo', { canChange: () => !state.busy && !state.counting });
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const state = {
@@ -250,6 +254,8 @@ async function savePhoto(canvas) {
       filter: state.filterId,
       seq: state.used,
       deviceId: getDeviceId(),
+      guestName: getGuestName(),
+      guestSlug: guestSlug(),
     });
     requestPersistence();
     await refreshThumb();
@@ -379,7 +385,9 @@ onLangChange(() => {
 
 registerScreen('photo', {
   async enter() {
+    if (!requireGuestName()) return;
     state.active = true;
+    frame.layout();
     state.used = await countShots('photo');
     renderCounter();
     refreshThumb();

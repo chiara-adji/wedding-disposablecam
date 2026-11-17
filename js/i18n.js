@@ -8,6 +8,12 @@ const DICT = {
     'welcome.start': 'Start',
     'welcome.note': 'Photos & videos you take will be sent automatically to {couple}’s wedding album.',
     'mode.hint': 'Choose one:',
+    'mode.hello': 'Hi, {name}!',
+    'mode.changeName': 'change name',
+    'name.placeholder': 'Enter your name',
+    'name.help': 'Your photos & videos will be saved under this name.',
+    'name.continue': 'Continue',
+    'name.error': 'Please enter your name first',
     'mode.photo': 'Photo',
     'mode.video': 'Video',
     'mode.cameraRoll': 'Camera roll',
@@ -62,6 +68,9 @@ const DICT = {
     'cam.unknown.title': 'Camera couldn’t start',
     'cam.unknown.text': 'Something went wrong. Please try again.',
     'cam.retry': 'Try again',
+    'cam.portrait': 'Portrait',
+    'cam.landscape': 'Landscape',
+    'cam.orientAria': 'Switch portrait / landscape',
     'cam.paused.title': 'Almost there',
     'cam.paused.text': 'Tap the button below to show the camera.',
     'cam.paused.btn': 'Show camera',
@@ -85,6 +94,12 @@ const DICT = {
     'welcome.start': 'Mulai',
     'welcome.note': 'Foto & video yang kamu ambil akan otomatis dikirim ke album pernikahan {couple}.',
     'mode.hint': 'Pilih salah satu:',
+    'mode.hello': 'Halo, {name}!',
+    'mode.changeName': 'ganti nama',
+    'name.placeholder': 'Tulis nama kamu',
+    'name.help': 'Foto & video kamu akan disimpan dengan nama ini.',
+    'name.continue': 'Lanjut',
+    'name.error': 'Tulis nama kamu dulu ya',
     'mode.photo': 'Foto',
     'mode.video': 'Video',
     'mode.cameraRoll': 'Camera roll',
@@ -139,6 +154,9 @@ const DICT = {
     'cam.unknown.title': 'Kamera belum bisa menyala',
     'cam.unknown.text': 'Ada kendala. Coba lagi ya.',
     'cam.retry': 'Coba lagi',
+    'cam.portrait': 'Potret',
+    'cam.landscape': 'Lanskap',
+    'cam.orientAria': 'Ganti potret / lanskap',
     'cam.paused.title': 'Sedikit lagi',
     'cam.paused.text': 'Ketuk tombol di bawah untuk menampilkan kamera.',
     'cam.paused.btn': 'Tampilkan kamera',
@@ -180,6 +198,7 @@ export function t(key, vars = {}) {
 export function applyI18n(root = document) {
   root.querySelectorAll('[data-i18n]').forEach((el) => (el.textContent = t(el.dataset.i18n)));
   root.querySelectorAll('[data-i18n-html]').forEach((el) => (el.innerHTML = t(el.dataset.i18nHtml)));
+  root.querySelectorAll('[data-i18n-placeholder]').forEach((el) => (el.placeholder = t(el.dataset.i18nPlaceholder)));
   root.querySelectorAll('[data-i18n-aria]').forEach((el) => el.setAttribute('aria-label', t(el.dataset.i18nAria)));
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-lang]').forEach((b) => {

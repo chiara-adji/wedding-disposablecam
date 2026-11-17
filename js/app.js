@@ -3,6 +3,7 @@ import { getItem, setItem, getDeviceId } from './storage.js';
 import { getMeta, setMeta } from './db.js';
 import { startRouter, registerScreen } from './router.js';
 import { applyI18n, setGlobals, t } from './i18n.js';
+import './guest.js';
 import './photo-page.js';
 import './video-page.js';
 import './memories.js';

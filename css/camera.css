@@ -82,6 +82,19 @@
 }
 .tool-btn.is-on { color: var(--gold); }
 .tool-btn[data-flash].is-on svg { fill: var(--gold); }
+.viewfinder__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  font: 600 10px/1 var(--font-sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  pointer-events: none;
+}
 .cam__filter-name {
   font: 600 11px/1 var(--font-sans);
   letter-spacing: 0.1em;
@@ -120,8 +133,8 @@
 }
 .viewfinder__stamp {
   position: absolute;
-  right: 14px;
-  bottom: 58px;
+  right: 12px;
+  bottom: 10px;
   font: 600 15px/1 'Courier New', ui-monospace, monospace;
   letter-spacing: 0.04em;
   color: rgba(255, 180, 100, 0.95);
@@ -524,3 +537,30 @@
 .cam.is-recording .zoom-bar { opacity: 0.35; pointer-events: none; }
 .cam--video .cam__thumb { position: relative; }
 .cam--video .zoom-bar { bottom: auto; top: 12px; }
+
+/* ---------- Bingkai rasio kamera (3:2 foto, 4:3 handycam) ---------- */
+.viewfinder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    repeating-linear-gradient(135deg, #0b0b0a 0 6px, #111110 6px 12px);
+}
+.viewfinder__frame {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 6px 24px rgba(0, 0, 0, 0.6);
+  transition: width 0.25s ease, height 0.25s ease;
+}
+.tool-btn--orient {
+  justify-self: center;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.tool-btn--orient svg {
+  transition: transform 0.25s ease;
+}
+.cam[data-orient="landscape"] .tool-btn--orient svg { transform: rotate(90deg); }
+.tool-btn:first-child { justify-self: start; }

@@ -6,8 +6,10 @@ import { VIDEO_FILTERS, getVideoFilter, applyVideoLook, drawHud } from './video-
 import { addShot, countShots, listShots, requestPersistence } from './db.js';
 import { getItem, setItem, getDeviceId } from './storage.js';
 import { registerScreen, go, currentRoute } from './router.js';
+import { getGuestName, guestSlug, requireGuestName } from './guest.js';
 import { showCamMessage, hideCamMessage } from './cam-messages.js';
 import { t, onLangChange } from './i18n.js';
+import { setupFrame } from './frame.js';
 
 const root = document.querySelector('[data-screen="video"]');
 const $ = (sel) => root.querySelector(sel);
@@ -25,12 +27,12 @@ const recordBtn = $('[data-record]');
 const ring = $('[data-ring]');
 const switchBtn = $('[data-switch]');
 const filterList = $('[data-filter-list]');
-const filterName = $('[data-filter-name]');
 const statusEl = $('[data-status]');
 const fileInput = $('[data-cam-file]');
 
 const ctx = canvas.getContext('2d');
-const camera = new Camera(video, viewfinder);
+const frameEl = $('[data-frame]');
+const camera = new Camera(video, frameEl);
 const MAX_MS = CONFIG.VIDEO_MAX_SECONDS * 1000;
 
 const state = {
@@ -97,7 +99,6 @@ function setFilter(id) {
   const f = getVideoFilter(id);
   state.filterId = f.id;
   setItem('videoFilter', f.id);
-  filterName.textContent = f.name;
   for (const b of filterList.children) {
     const on = b.dataset.id === f.id;
     b.classList.toggle('is-active', on);
@@ -167,15 +168,15 @@ async function refreshThumb() {
 // ---------------------------------------------------------------
 function sizeCanvas() {
   // 720p: sisi pendek 720 px, mengikuti bentuk viewfinder (maks 1280)
-  const ratio = camera.boxRatio();
+  const ratio = frame.ratio();
   let w;
   let h;
   if (ratio <= 1) {
     w = 720;
-    h = Math.min(1280, Math.round(720 / ratio));
+    h = Math.round(720 / ratio);
   } else {
     h = 720;
-    w = Math.min(1280, Math.round(720 * ratio));
+    w = Math.round(720 * ratio);
   }
   w -= w % 2;
   h -= h % 2;
@@ -226,6 +227,10 @@ function stopLoop() {
 }
 
 window.addEventListener('resize', () => state.active && sizeCanvas());
+const frame = setupFrame(root, 'video', {
+  canChange: () => !recording() && !state.stopping,
+  onChange: () => sizeCanvas(),
+});
 
 // ---------------------------------------------------------------
 //  Kamera + mikrofon
@@ -392,6 +397,8 @@ async function saveVideo(blob, mime, poster, duration) {
       filter: state.filterId,
       seq: state.used,
       deviceId: getDeviceId(),
+      guestName: getGuestName(),
+      guestSlug: guestSlug(),
     });
     requestPersistence();
     await refreshThumb();
@@ -460,7 +467,9 @@ onLangChange(renderTexts);
 
 registerScreen('video', {
   async enter() {
+    if (!requireGuestName()) return;
     state.active = true;
+    frame.layout();
     state.used = await countShots('video');
     renderTexts();
     refreshThumb();

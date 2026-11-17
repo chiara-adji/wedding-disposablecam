@@ -5,30 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#1a120c">
   <meta name="robots" content="noindex">
-  <meta name="app-version" content="202611180012">
+  <meta name="app-version" content="202611180037">
   <title>The Wedding of Chiara &amp; Adji</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@500;600&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=202611180012">
-  <link rel="stylesheet" href="css/camera.css?v=202611180012">
+  <link rel="stylesheet" href="css/style.css?v=202611180037">
+  <link rel="stylesheet" href="css/camera.css?v=202611180037">
   <link rel="preload" as="image" href="assets/img/welcome-bg.jpg">
   <!-- import-map:start (dibuat otomatis oleh bump-version) -->
   <script type="importmap">{
     "imports": {
-      "./js/app.js": "./js/app.js?v=202611180012",
-      "./js/cam-messages.js": "./js/cam-messages.js?v=202611180012",
-      "./js/camera.js": "./js/camera.js?v=202611180012",
-      "./js/config.js": "./js/config.js?v=202611180012",
-      "./js/db.js": "./js/db.js?v=202611180012",
-      "./js/filters.js": "./js/filters.js?v=202611180012",
-      "./js/i18n.js": "./js/i18n.js?v=202611180012",
-      "./js/memories.js": "./js/memories.js?v=202611180012",
-      "./js/photo-page.js": "./js/photo-page.js?v=202611180012",
-      "./js/router.js": "./js/router.js?v=202611180012",
-      "./js/storage.js": "./js/storage.js?v=202611180012",
-      "./js/video-filters.js": "./js/video-filters.js?v=202611180012",
-      "./js/video-page.js": "./js/video-page.js?v=202611180012"
+      "./js/app.js": "./js/app.js?v=202611180037",
+      "./js/cam-messages.js": "./js/cam-messages.js?v=202611180037",
+      "./js/camera.js": "./js/camera.js?v=202611180037",
+      "./js/config.js": "./js/config.js?v=202611180037",
+      "./js/db.js": "./js/db.js?v=202611180037",
+      "./js/filters.js": "./js/filters.js?v=202611180037",
+      "./js/frame.js": "./js/frame.js?v=202611180037",
+      "./js/guest.js": "./js/guest.js?v=202611180037",
+      "./js/i18n.js": "./js/i18n.js?v=202611180037",
+      "./js/memories.js": "./js/memories.js?v=202611180037",
+      "./js/photo-page.js": "./js/photo-page.js?v=202611180037",
+      "./js/router.js": "./js/router.js?v=202611180037",
+      "./js/storage.js": "./js/storage.js?v=202611180037",
+      "./js/video-filters.js": "./js/video-filters.js?v=202611180037",
+      "./js/video-page.js": "./js/video-page.js?v=202611180037"
     }
   }</script>
   <!-- import-map:end -->
@@ -54,9 +56,45 @@
     </div>
 
     <div class="welcome__bottom">
-      <a class="btn btn--olive btn--start" href="#/mode" data-i18n="welcome.start">Start</a>
+      <a class="btn btn--olive btn--start" href="#/name" data-i18n="welcome.start">Start</a>
       <p class="fine-print" data-i18n="welcome.note"></p>
     </div>
+  </main>
+
+  <!-- ================= HALAMAN 1b: NAMA TAMU ================= -->
+  <main class="screen name" data-screen="name" data-title="Your name" hidden>
+    <div class="name__bg" aria-hidden="true"></div>
+    <div class="name__grid" aria-hidden="true">
+      <span class="name__focus"><span class="name__sun"></span></span>
+    </div>
+    <div class="name__side" aria-hidden="true">
+      <span data-name-clock>00:00:00</span>
+      <span data-couple>Chiara &amp; Adji</span>
+      <span>19.12.2026</span>
+    </div>
+
+    <form class="name__content" data-name-form novalidate>
+      <h1 class="script-title script-title--name">
+        <span>Who's behind</span>
+        <span>the lens?</span>
+      </h1>
+      <label class="name__field">
+        <span class="visually-hidden" data-i18n="name.placeholder">Enter your name</span>
+        <input class="name__input" type="text" name="guest" data-name-input
+               maxlength="30" autocomplete="given-name" autocapitalize="words" enterkeyhint="go"
+               data-i18n-placeholder="name.placeholder">
+      </label>
+      <p class="name__help" data-name-help data-i18n="name.help"></p>
+      <button class="btn btn--cream name__go" type="submit">
+        <span data-i18n="name.continue">Continue</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6" /></svg>
+      </button>
+    </form>
+
+    <footer class="couple-footer">
+      <span data-couple>Chiara &amp; Adji</span><br>
+      <span data-place-date>Cepu, 19.12.2026</span>
+    </footer>
   </main>
 
   <!-- ================= HALAMAN 2: PILIH MODE ================= -->
@@ -98,6 +136,7 @@
         <span>How would you like to</span>
         <span>capture today?</span>
       </h1>
+      <p class="mode__hello"><span data-hello></span> · <a href="#/name" data-i18n="mode.changeName"></a></p>
       <p class="mode__hint" data-i18n="mode.hint">Choose one:</p>
 
       <div class="mode__buttons">
@@ -136,7 +175,10 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 5 13.5h6L10 22l8-11.5h-6z" /></svg>
         <span data-flash-label>Flash off</span>
       </button>
-      <span class="cam__filter-name" data-filter-name>Fujifilm 400</span>
+      <button class="tool-btn tool-btn--orient" type="button" data-orient>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2" data-orient-icon /></svg>
+        <span data-orient-label>Portrait</span>
+      </button>
       <button class="tool-btn" type="button" data-timer>
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8" /><path d="M12 9v4l2.5 2M9.5 2.5h5" /></svg>
         <span data-timer-label>Timer off</span>
@@ -144,10 +186,13 @@
     </div>
 
     <div class="viewfinder" data-viewfinder>
-      <video class="viewfinder__video" data-video autoplay muted playsinline></video>
-      <div class="viewfinder__overlay" data-filter-overlay></div>
-      <div class="viewfinder__grain" data-grain></div>
-      <div class="viewfinder__stamp" data-live-stamp></div>
+      <div class="viewfinder__frame" data-frame>
+        <video class="viewfinder__video" data-video autoplay muted playsinline></video>
+        <div class="viewfinder__overlay" data-filter-overlay></div>
+        <div class="viewfinder__grain" data-grain></div>
+        <div class="viewfinder__stamp" data-live-stamp></div>
+        <span class="viewfinder__badge" data-filter-name>Fujifilm 400</span>
+      </div>
       <div class="viewfinder__spinner" aria-hidden="true"></div>
 
       <div class="zoom-bar" data-zoom-bar></div>
@@ -198,13 +243,18 @@
 
     <div class="cam__tools">
       <span class="tool-note" data-max-len></span>
-      <span class="cam__filter-name" data-filter-name>Handy '98</span>
+      <button class="tool-btn tool-btn--orient" type="button" data-orient>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2" data-orient-icon /></svg>
+        <span data-orient-label>Portrait</span>
+      </button>
       <span class="tool-note tool-note--right" data-rec-left></span>
     </div>
 
     <div class="viewfinder" data-viewfinder>
-      <video class="viewfinder__source" data-video autoplay muted playsinline></video>
-      <canvas class="viewfinder__canvas" data-canvas></canvas>
+      <div class="viewfinder__frame" data-frame>
+        <video class="viewfinder__source" data-video autoplay muted playsinline></video>
+        <canvas class="viewfinder__canvas" data-canvas></canvas>
+      </div>
       <div class="viewfinder__spinner" aria-hidden="true"></div>
       <div class="zoom-bar" data-zoom-bar></div>
 
@@ -298,6 +348,6 @@
     </footer>
   </main>
 
-  <script type="module" src="js/app.js?v=202611180012"></script>
+  <script type="module" src="js/app.js?v=202611180037"></script>
 </body>
 </html>
