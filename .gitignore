@@ -6,3 +6,6 @@ CLAUDE.md
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Kode Apps Script berisi ID folder Drive pribadi; disimpan lokal saja
+apps-script/

@@ -5,32 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#1a120c">
   <meta name="robots" content="noindex">
-  <meta name="app-version" content="202611180037">
+  <meta name="app-version" content="202611180044">
   <title>The Wedding of Chiara &amp; Adji</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@500;600&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=202611180037">
-  <link rel="stylesheet" href="css/camera.css?v=202611180037">
+  <link rel="stylesheet" href="css/style.css?v=202611180044">
+  <link rel="stylesheet" href="css/camera.css?v=202611180044">
   <link rel="preload" as="image" href="assets/img/welcome-bg.jpg">
   <!-- import-map:start (dibuat otomatis oleh bump-version) -->
   <script type="importmap">{
     "imports": {
-      "./js/app.js": "./js/app.js?v=202611180037",
-      "./js/cam-messages.js": "./js/cam-messages.js?v=202611180037",
-      "./js/camera.js": "./js/camera.js?v=202611180037",
-      "./js/config.js": "./js/config.js?v=202611180037",
-      "./js/db.js": "./js/db.js?v=202611180037",
-      "./js/filters.js": "./js/filters.js?v=202611180037",
-      "./js/frame.js": "./js/frame.js?v=202611180037",
-      "./js/guest.js": "./js/guest.js?v=202611180037",
-      "./js/i18n.js": "./js/i18n.js?v=202611180037",
-      "./js/memories.js": "./js/memories.js?v=202611180037",
-      "./js/photo-page.js": "./js/photo-page.js?v=202611180037",
-      "./js/router.js": "./js/router.js?v=202611180037",
-      "./js/storage.js": "./js/storage.js?v=202611180037",
-      "./js/video-filters.js": "./js/video-filters.js?v=202611180037",
-      "./js/video-page.js": "./js/video-page.js?v=202611180037"
+      "./js/app.js": "./js/app.js?v=202611180044",
+      "./js/cam-messages.js": "./js/cam-messages.js?v=202611180044",
+      "./js/camera.js": "./js/camera.js?v=202611180044",
+      "./js/config.js": "./js/config.js?v=202611180044",
+      "./js/db.js": "./js/db.js?v=202611180044",
+      "./js/filters.js": "./js/filters.js?v=202611180044",
+      "./js/frame.js": "./js/frame.js?v=202611180044",
+      "./js/guest.js": "./js/guest.js?v=202611180044",
+      "./js/i18n.js": "./js/i18n.js?v=202611180044",
+      "./js/memories.js": "./js/memories.js?v=202611180044",
+      "./js/photo-page.js": "./js/photo-page.js?v=202611180044",
+      "./js/router.js": "./js/router.js?v=202611180044",
+      "./js/storage.js": "./js/storage.js?v=202611180044",
+      "./js/uploader.js": "./js/uploader.js?v=202611180044",
+      "./js/video-filters.js": "./js/video-filters.js?v=202611180044",
+      "./js/video-page.js": "./js/video-page.js?v=202611180044"
     }
   }</script>
   <!-- import-map:end -->
@@ -136,7 +137,7 @@
         <span>How would you like to</span>
         <span>capture today?</span>
       </h1>
-      <p class="mode__hello"><span data-hello></span> · <a href="#/name" data-i18n="mode.changeName"></a></p>
+      <p class="mode__hello"><span data-hello></span></p>
       <p class="mode__hint" data-i18n="mode.hint">Choose one:</p>
 
       <div class="mode__buttons">
@@ -215,6 +216,7 @@
     <div class="cam__controls">
       <span class="cam__left" data-left>20 left</span>
       <span class="cam__label" data-i18n="photo.label">Photo</span>
+      <span class="cam__sync" data-sync role="status"></span>
       <a class="cam__thumb" href="#/memories" data-thumb data-i18n-aria="photo.thumbAria"></a>
       <button class="shutter" type="button" data-shutter data-i18n-aria="photo.shutterAria"></button>
       <button class="cam__switch" type="button" data-switch data-i18n-aria="photo.switchAria">
@@ -274,6 +276,7 @@
     <div class="cam__controls">
       <span class="cam__left" data-left>5 left</span>
       <span class="cam__label" data-rec-label>Record</span>
+      <span class="cam__sync" data-sync role="status"></span>
       <a class="cam__thumb" href="#/memories" data-thumb data-i18n-aria="video.thumbAria"></a>
       <button class="record-btn" type="button" data-record data-i18n-aria="video.recordAria">
         <svg class="record-btn__ring" viewBox="0 0 100 100" aria-hidden="true">
@@ -320,8 +323,17 @@
 
     <!-- Tampilan besar satu foto -->
     <div class="viewer" data-viewer hidden>
-      <button class="viewer__close" type="button" data-viewer-close data-i18n-aria="mem.close">&times;</button>
+      <div class="viewer__top">
+        <span class="viewer__pos" data-viewer-pos></span>
+        <button class="viewer__close" type="button" data-viewer-close data-i18n-aria="mem.close">&times;</button>
+      </div>
       <div class="viewer__media" data-viewer-media></div>
+      <button class="viewer__nav viewer__nav--prev" type="button" data-viewer-prev aria-label="Previous">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8" /></svg>
+      </button>
+      <button class="viewer__nav viewer__nav--next" type="button" data-viewer-next aria-label="Next">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 4 8 8-8 8" /></svg>
+      </button>
       <div class="viewer__actions">
         <button class="btn btn--olive viewer__save" type="button" data-viewer-save data-i18n="mem.save"></button>
       </div>
@@ -348,6 +360,6 @@
     </footer>
   </main>
 
-  <script type="module" src="js/app.js?v=202611180037"></script>
+  <script type="module" src="js/app.js?v=202611180044"></script>
 </body>
 </html>

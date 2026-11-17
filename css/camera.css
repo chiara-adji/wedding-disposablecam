@@ -262,7 +262,7 @@
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   grid-template-areas:
-    "left label ."
+    "left label sync"
     "thumb shutter switch";
   align-items: center;
   row-gap: 6px;
@@ -277,6 +277,18 @@
   color: var(--gold);
 }
 .cam.is-empty .cam__left { color: #ff9a8a; }
+/* status upload kecil di kanan atas tombol shutter */
+.cam__sync {
+  grid-area: sync;
+  justify-self: end;
+  min-height: 12px;
+  font: 600 10.5px/1.1 var(--font-sans);
+  letter-spacing: 0.04em;
+  text-align: right;
+  color: rgba(255, 252, 247, 0.7);
+}
+.cam__sync.is-waiting { color: #ffc876; }
+.cam__sync.is-done { color: #b9d39a; }
 .cam__label {
   grid-area: label;
   justify-self: center;

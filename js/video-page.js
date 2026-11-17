@@ -4,6 +4,7 @@ import { CONFIG } from './config.js';
 import { Camera, cameraSupported, CameraError } from './camera.js';
 import { VIDEO_FILTERS, getVideoFilter, applyVideoLook, drawHud } from './video-filters.js';
 import { addShot, countShots, listShots, requestPersistence } from './db.js';
+import { kickUpload } from './uploader.js';
 import { getItem, setItem, getDeviceId } from './storage.js';
 import { registerScreen, go, currentRoute } from './router.js';
 import { getGuestName, guestSlug, requireGuestName } from './guest.js';
@@ -401,6 +402,7 @@ async function saveVideo(blob, mime, poster, duration) {
       guestSlug: guestSlug(),
     });
     requestPersistence();
+    kickUpload();
     await refreshThumb();
     setStatus(t('video.saved', { n: left() }), 3000);
     if (left() === 0) {

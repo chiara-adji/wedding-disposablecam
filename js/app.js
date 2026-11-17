@@ -7,6 +7,7 @@ import './guest.js';
 import './photo-page.js';
 import './video-page.js';
 import './memories.js';
+import './uploader.js';
 
 // ---------- Kode acara dari link QR (?e=KODE) ----------
 const params = new URLSearchParams(location.search);
