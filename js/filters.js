@@ -56,6 +56,28 @@ export const PHOTO_FILTERS = [
     },
   },
   {
+    // Seperti referensi Chiara: kamera saku + blitz langsung di pesta malam.
+    // Wajah terang tapi tidak gosong, latar cepat gelap, warna agak kalem,
+    // bayangan sedikit kehijauan/dingin, grain halus yang terasa.
+    id: 'partyflash',
+    name: 'Party Flash',
+    swatch: 'radial-gradient(circle at 45% 40%, #fff3df, #d9b48f 30%, #3c4136 70%, #141612)',
+    css: 'contrast(1.12) saturate(0.86) brightness(1.03) sepia(0.06)',
+    overlay: 'radial-gradient(ellipse 75% 65% at 50% 45%, rgba(255,244,225,0.10) 0%, transparent 45%, rgba(10,16,12,0.5) 100%)',
+    params: {
+      gain: [1.05, 1.0, 0.94], // kulit hangat kena blitz
+      sat: 0.86,
+      contrast: 1.12,
+      lift: 0.025,
+      shoulder: 0.22, // highlight blitz diredam supaya tidak over
+      shadowTint: [-10, 4, 7], // bayangan sedikit hijau-dingin ala film
+      glow: 0.08,
+      grain: 0.2,
+      vignette: 0.42, // cahaya blitz cepat hilang ke pinggir
+      flash: 0.14,
+    },
+  },
+  {
     id: 'noir',
     name: 'B&W Noir',
     swatch: 'linear-gradient(135deg, #f2f2f2, #8a8a8a 50%, #111)',
@@ -140,6 +162,8 @@ function colorPass(ctx, w, h, p) {
   } else {
     const [gr, gg, gb] = p.gain || [1, 1, 1];
     const s = p.sat ?? 1;
+    const [tr, tg, tb] = p.shadowTint || [0, 0, 0];
+    const tint = tr || tg || tb;
     for (let i = 0; i < d.length; i += 4) {
       let r = d[i] * gr;
       let g = d[i + 1] * gg;
@@ -148,6 +172,14 @@ function colorPass(ctx, w, h, p) {
       r = y + (r - y) * s;
       g = y + (g - y) * s;
       b = y + (b - y) * s;
+      if (tint) {
+        // warna tambahan hanya di bagian gelap
+        const k = 1 - y / 255;
+        const kk = k * k;
+        r += tr * kk;
+        g += tg * kk;
+        b += tb * kk;
+      }
       d[i] = lut[r < 0 ? 0 : r > 255 ? 255 : r | 0];
       d[i + 1] = lut[g < 0 ? 0 : g > 255 ? 255 : g | 0];
       d[i + 2] = lut[b < 0 ? 0 : b > 255 ? 255 : b | 0];

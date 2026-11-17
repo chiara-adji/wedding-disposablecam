@@ -39,6 +39,7 @@ const statusEl = $('[data-status]');
 const fileInput = $('[data-cam-file]');
 
 const frameEl = $('[data-frame]');
+const FLASH_HOLD_MS = 1000;
 const camera = new Camera(video, frameEl);
 const frame = setupFrame(root, 'photo', { canChange: () => !state.busy && !state.counting });
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -294,10 +295,14 @@ async function takePhoto() {
     const front = camera.facing === 'user';
     const torch = state.flash && !front && camera.hasTorch && (await camera.setTorch(true));
     const screenFlash = state.flash && front;
-    if (torch) await wait(450);
-    if (screenFlash) {
-      flashEl.classList.add('is-screen');
-      await wait(300);
+    if (screenFlash) flashEl.classList.add('is-screen');
+    if (torch || screenFlash) {
+      // Lampu menyala ±1 detik dulu supaya fokus & pencahayaan kamera sempat menyesuaikan
+      // (kalau langsung dijepret, cahayanya belum rata / ada bagian yang terlalu terang).
+      setStatus(t('photo.holdStill'), 1200);
+      camera.refocus();
+      await wait(FLASH_HOLD_MS);
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
     }
     const canvas = camera.grabFrame(1600);
     if (torch) camera.setTorch(false);

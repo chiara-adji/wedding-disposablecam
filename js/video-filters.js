@@ -51,8 +51,6 @@ function scanlinePattern(ctx) {
 
 const small = document.createElement('canvas');
 const smallCtx = small.getContext('2d');
-const edge = document.createElement('canvas');
-const edgeCtx = edge.getContext('2d');
 
 function blurredCopy(ctx, w, h, factor = 12) {
   small.width = Math.max(8, Math.round(w / factor));
@@ -104,28 +102,14 @@ export function applyVideoLook(ctx, w, h, filterId, frame) {
   ctx.save();
   switch (filterId) {
     case 'minidv': {
-      // glow hangat + pinggiran lembut (soft focus) + grain halus
+      // glow hangat tipis + grain yang terasa (tanpa pinggiran blur yang terlihat goyang)
       const blur = blurredCopy(ctx, w, h, 14);
-      edge.width = w;
-      edge.height = h;
-      edgeCtx.globalCompositeOperation = 'source-over';
-      edgeCtx.drawImage(blur, 0, 0, w, h);
-      const r = Math.hypot(w, h) / 2;
-      const m = edgeCtx.createRadialGradient(w / 2, h / 2, r * 0.35, w / 2, h / 2, r * 0.95);
-      m.addColorStop(0, 'rgba(0,0,0,0)');
-      m.addColorStop(1, 'rgba(0,0,0,1)');
-      edgeCtx.globalCompositeOperation = 'destination-in';
-      edgeCtx.fillStyle = m;
-      edgeCtx.fillRect(0, 0, w, h);
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.globalAlpha = 0.9;
-      ctx.drawImage(edge, 0, 0);
       ctx.globalCompositeOperation = 'screen';
-      ctx.globalAlpha = 0.28;
+      ctx.globalAlpha = 0.16;
       ctx.drawImage(blur, 0, 0, w, h);
       fill(ctx, w, h, 'rgb(236, 226, 214)', 'multiply', 0.5); // redam lampu terlalu terang
       fill(ctx, w, h, 'rgb(255, 170, 110)', 'soft-light', 0.22);
-      grain(ctx, w, h, 0.16, frame);
+      grain(ctx, w, h, 0.34, frame);
       vignette(ctx, w, h, 0.25);
       break;
     }

@@ -138,6 +138,18 @@ export class Camera {
     this.hasTorch = !!caps.torch;
   }
 
+  /** Minta kamera fokus & atur cahaya ulang (kalau HP mendukung). Tidak apa-apa kalau gagal. */
+  refocus() {
+    const caps = this.track?.getCapabilities?.() || {};
+    const adv = {};
+    if (caps.focusMode?.includes('single-shot')) adv.focusMode = 'single-shot';
+    else if (caps.focusMode?.includes('continuous')) adv.focusMode = 'continuous';
+    if (caps.exposureMode?.includes('continuous')) adv.exposureMode = 'continuous';
+    if (caps.whiteBalanceMode?.includes('continuous')) adv.whiteBalanceMode = 'continuous';
+    if (!Object.keys(adv).length) return;
+    this.track.applyConstraints({ advanced: [adv] }).catch(() => {});
+  }
+
   /** Pilihan zoom yang tersedia di HP ini */
   zoomLevels() {
     const levels = [];
