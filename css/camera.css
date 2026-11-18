@@ -233,6 +233,12 @@
 }
 .cam-msg__text li { margin: 6px 0; }
 .cam-msg__text b { color: var(--gold); }
+.cam-msg__notice {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.86em;
+  opacity: 0.8;
+}
 .cam-msg__btn {
   min-height: 58px;
   width: 100%;

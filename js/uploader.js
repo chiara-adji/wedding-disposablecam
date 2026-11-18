@@ -315,6 +315,13 @@ export async function kickUpload() {
   }
 }
 
+/** Galeri bersama: satu halaman daftar foto/video semua tamu (terbaru dulu). */
+export async function fetchGallery(pageToken = null) {
+  if (!CONFIG.APPS_SCRIPT_URL) throw new UploadError('off', true);
+  const r = await call('gallery', pageToken ? { pageToken } : {}, 30000);
+  return { items: r.items || [], next: r.next || null };
+}
+
 export function onUploadState(fn) {
   listeners.add(fn);
   fn({ ...state });

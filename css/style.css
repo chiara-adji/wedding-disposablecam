@@ -294,6 +294,34 @@ a { color: inherit; }
   color: rgba(255, 252, 247, 0.85);
 }
 
+.mode__notice {
+  max-width: 320px;
+  margin: 18px 0 0;
+  font: 500 12.5px/1.45 var(--font-sans);
+  color: rgba(255, 252, 247, 0.82);
+}
+.mode__notice b { color: var(--gold); font-weight: 700; }
+.mode__album {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 6px 4px;
+  font: 600 14px/1.2 var(--font-sans);
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.mode__album svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .mode__buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -550,6 +578,52 @@ body[data-route="name"] .lang-switch { display: flex; }
   font: 600 16px/1 var(--font-sans);
 }
 .memories .couple-footer { padding-top: 24px; }
+
+/* Tab Punyaku / Semua tamu */
+.mem-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin: 0 14px 12px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+.mem-tabs__btn {
+  min-height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font: 600 14px/1 var(--font-sans);
+  cursor: pointer;
+}
+.mem-tabs__btn.is-active {
+  background: var(--olive, #6b7d4a);
+  color: var(--cream);
+}
+.memories__more {
+  display: flex;
+  justify-content: center;
+  padding: 14px 16px 0;
+}
+.memories__more-btn {
+  min-height: 48px;
+  padding: 0 26px;
+  font: 600 15px/1 var(--font-sans);
+}
+.memories__loading {
+  margin: 0;
+  font: 500 14px/1.4 var(--font-sans);
+  color: rgba(255, 255, 255, 0.6);
+}
+.viewer__media iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 60vh;
+  border: 0;
+  background: #000;
+}
 
 .viewer {
   position: fixed;

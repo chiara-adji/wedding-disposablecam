@@ -16,6 +16,10 @@ export const CONFIG = {
   VIDEO_LIMIT: 10,
   VIDEO_MAX_SECONDS: 30,
 
+  // Galeri bersama: tamu bisa melihat foto & video semua tamu (tab "All guests" di Memories).
+  // Matikan (false) kalau tidak jadi dipakai. Butuh fungsi bukaGaleri() sudah dijalankan di Apps Script.
+  SHARED_GALLERY: true,
+
   // Teks yang tampil di halaman
   COUPLE: 'Chiara & Adji',
   PLACE_DATE: 'Cepu, 19.12.2026',

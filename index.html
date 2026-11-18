@@ -5,33 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#1a120c">
   <meta name="robots" content="noindex">
-  <meta name="app-version" content="202611180116">
+  <meta name="app-version" content="202611181526">
   <title>The Wedding of Chiara &amp; Adji</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@500;600&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=202611180116">
-  <link rel="stylesheet" href="css/camera.css?v=202611180116">
+  <link rel="stylesheet" href="css/style.css?v=202611181526">
+  <link rel="stylesheet" href="css/camera.css?v=202611181526">
   <link rel="preload" as="image" href="assets/img/welcome-bg.jpg">
   <!-- import-map:start (dibuat otomatis oleh bump-version) -->
   <script type="importmap">{
     "imports": {
-      "./js/app.js": "./js/app.js?v=202611180116",
-      "./js/cam-messages.js": "./js/cam-messages.js?v=202611180116",
-      "./js/camera.js": "./js/camera.js?v=202611180116",
-      "./js/config.js": "./js/config.js?v=202611180116",
-      "./js/db.js": "./js/db.js?v=202611180116",
-      "./js/filters.js": "./js/filters.js?v=202611180116",
-      "./js/frame.js": "./js/frame.js?v=202611180116",
-      "./js/guest.js": "./js/guest.js?v=202611180116",
-      "./js/i18n.js": "./js/i18n.js?v=202611180116",
-      "./js/memories.js": "./js/memories.js?v=202611180116",
-      "./js/photo-page.js": "./js/photo-page.js?v=202611180116",
-      "./js/router.js": "./js/router.js?v=202611180116",
-      "./js/storage.js": "./js/storage.js?v=202611180116",
-      "./js/uploader.js": "./js/uploader.js?v=202611180116",
-      "./js/video-filters.js": "./js/video-filters.js?v=202611180116",
-      "./js/video-page.js": "./js/video-page.js?v=202611180116"
+      "./js/app.js": "./js/app.js?v=202611181526",
+      "./js/cam-messages.js": "./js/cam-messages.js?v=202611181526",
+      "./js/camera.js": "./js/camera.js?v=202611181526",
+      "./js/config.js": "./js/config.js?v=202611181526",
+      "./js/db.js": "./js/db.js?v=202611181526",
+      "./js/filters.js": "./js/filters.js?v=202611181526",
+      "./js/frame.js": "./js/frame.js?v=202611181526",
+      "./js/guest.js": "./js/guest.js?v=202611181526",
+      "./js/i18n.js": "./js/i18n.js?v=202611181526",
+      "./js/memories.js": "./js/memories.js?v=202611181526",
+      "./js/photo-page.js": "./js/photo-page.js?v=202611181526",
+      "./js/router.js": "./js/router.js?v=202611181526",
+      "./js/storage.js": "./js/storage.js?v=202611181526",
+      "./js/uploader.js": "./js/uploader.js?v=202611181526",
+      "./js/video-filters.js": "./js/video-filters.js?v=202611181526",
+      "./js/video-page.js": "./js/video-page.js?v=202611181526"
     }
   }</script>
   <!-- import-map:end -->
@@ -152,6 +152,11 @@
           <span class="btn__sub" data-i18n="mode.video">Video</span>
         </a>
       </div>
+      <p class="mode__notice" data-i18n-html="mode.notice"></p>
+      <a class="mode__album" href="#/memories" data-album-link hidden>
+        <span data-i18n="mode.album">See everyone’s photos</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6" /></svg>
+      </a>
     </div>
 
     <footer class="couple-footer">
@@ -310,10 +315,20 @@
       <span class="memories__count" data-mem-count></span>
     </header>
 
+    <div class="mem-tabs" role="tablist" data-mem-tabs hidden>
+      <button class="mem-tabs__btn" type="button" role="tab" data-mem-tab="mine" data-i18n="mem.tabMine">Mine</button>
+      <button class="mem-tabs__btn" type="button" role="tab" data-mem-tab="all" data-i18n="mem.tabAll">All guests</button>
+    </div>
+
     <div class="memories__grid" data-mem-grid></div>
     <div class="memories__empty" data-mem-empty hidden>
-      <p data-i18n="mem.empty"></p>
-      <a class="btn btn--olive memories__go" href="#/mode" data-i18n="mem.go"></a>
+      <p data-mem-empty-text></p>
+      <a class="btn btn--olive memories__go" href="#/mode" data-mem-go data-i18n="mem.go"></a>
+      <button class="btn btn--olive memories__go" type="button" data-mem-retry data-i18n="mem.retry" hidden></button>
+    </div>
+    <div class="memories__more">
+      <button class="btn btn--ghost memories__more-btn" type="button" data-mem-more data-i18n="mem.more" hidden></button>
+      <p class="memories__loading" data-mem-loading data-i18n="mem.loading" hidden></p>
     </div>
 
     <footer class="couple-footer">
@@ -383,6 +398,6 @@
     </div>
   </main>
 
-  <script type="module" src="js/app.js?v=202611180116"></script>
+  <script type="module" src="js/app.js?v=202611181526"></script>
 </body>
 </html>

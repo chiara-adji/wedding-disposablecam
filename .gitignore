@@ -12,3 +12,6 @@ apps-script/
 
 # File QR untuk dicetak (bukan bagian web)
 qr/
+
+# Desain poster (aset & file cetak)
+poster/
